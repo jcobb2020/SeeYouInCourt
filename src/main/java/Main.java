@@ -16,6 +16,8 @@ public class Main {
         List<Judgment> judgments = new ArrayList<>();
         judgments = jCreator.createAllJudgmentList(jsons);
 //        judgments = jCreator.createJudgment(jsons.get(0));
+        Judgment toDisplayRubrum = judgments.get(3);
+        toDisplayRubrum.displayRubrum();
         System.out.println("wat");
     }
 }

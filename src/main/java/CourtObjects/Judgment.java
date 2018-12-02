@@ -30,6 +30,20 @@ public class Judgment {
     private List<Chamber> chambers;
     private List<DissentingOpinion> dissentingOpinions;
 
+
+    public void displayRubrum(){
+        System.out.println("Sygnatura: " + this.id);
+        System.out.println("Data" + this.receiptDate);
+        System.out.println("Typ Sądu" + this.courtType);
+        displayAllJudges();
+    }
+
+    private void displayAllJudges(){
+        for (Judge j : this.judges){
+            j.displayJudge();
+        }
+    }
+
     public int getId() {
         return id;
     }
