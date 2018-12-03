@@ -5,17 +5,28 @@ public class Judge {
     private String function;
     private List<SpecialRoles> specialRoles;
 
-    public void displayJudge() {
-        System.out.println("Name: " + name);
-        System.out.println("Function: " + function);
-        displaySpecialRoles();
+    public String displayJudge() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Name: " + name +"\n");
+        System.out.println("Function: " + function + "\n");
+        sb.append(this.displaySpecialRoles());
+        return sb.toString();
     }
 
-    private void displaySpecialRoles() {
-        System.out.println("Special Roles:");
+    private String displaySpecialRoles() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Special Roles: \n");
         for (SpecialRoles role : specialRoles) {
-            System.out.println(specialRoles);
+             sb.append(specialRoles + "\n");
         }
-        System.out.println("----");
+        sb.append("----");
+        return sb.toString();
+    }
+
+    public boolean equals(Judge judge){
+        if(this.name.equals(judge.name)){
+            return true;
+        }
+        return false;
     }
 }

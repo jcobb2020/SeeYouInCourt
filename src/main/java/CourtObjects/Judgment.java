@@ -31,17 +31,25 @@ public class Judgment {
     private List<DissentingOpinion> dissentingOpinions;
 
 
-    public void displayRubrum(){
-        System.out.println("Sygnatura: " + this.id);
-        System.out.println("Data" + this.receiptDate);
-        System.out.println("Typ Sądu" + this.courtType);
-        displayAllJudges();
+    public String displayRubrum(){            //zmienić na zwracanie stringa
+       StringBuilder sb = new StringBuilder();
+    //    String rubrum = new String();
+        //
+       sb.append("Sygnatura: " + this.id +"\n");
+       sb.append("Sygnatura: " + this.id + "\n");
+   //     rubrum.
+        sb.append("Data: " + this.receiptDate + "\n");
+        sb.append("Typ Sądu: " + this.courtType +"\n");
+        sb.append(displayAllJudges());
+        return sb.toString();
     }
 
-    private void displayAllJudges(){
+    private String displayAllJudges(){
+        StringBuilder sb = new StringBuilder();
         for (Judge j : this.judges){
-            j.displayJudge();
+            sb.append(j.displayJudge()+"\n");
         }
+        return sb.toString();
     }
 
     public int getId() {

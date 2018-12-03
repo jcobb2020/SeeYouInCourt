@@ -17,8 +17,9 @@ public class Main {
         judgments = jCreator.createAllJudgmentList(jsons);
 //        judgments = jCreator.createJudgment(jsons.get(0));
         Judgment toDisplayRubrum = judgments.get(3);
-        toDisplayRubrum.displayRubrum();
-        System.out.println("wat");
+        String toDisplay = toDisplayRubrum.displayRubrum();
+
+        System.out.println(toDisplay);
     }
 }
 //C:/Users/JCobb/Desktop/Studia/Obiektowe/json

@@ -32,7 +32,7 @@ public class FileGetter {
         }
     }
 
-    public List<String> getJSONStrings(final File folder) {
+    private List<String> getJSONStrings(final File folder) {
         List<String> jsons = new ArrayList<String>();
 
         for (final File fileEntry : folder.listFiles()) {
