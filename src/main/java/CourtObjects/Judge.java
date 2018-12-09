@@ -23,10 +23,28 @@ public class Judge {
         return sb.toString();
     }
 
-    public boolean equals(Judge judge){
-        if(this.name.equals(judge.name)){
+    public String getName(){
+        return this.name;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(this.getClass()!= o.getClass()){
+            return false;
+        }
+        Judge judge = (Judge) o;
+        if(this.name.equals(judge.getName())){
             return true;
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        for (int i = 0; i < name.length(); i++) {
+            hash = hash*31 + name.charAt(i);
+        }
+        return hash;
     }
 }

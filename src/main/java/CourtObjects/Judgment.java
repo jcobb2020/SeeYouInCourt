@@ -33,15 +33,13 @@ public class Judgment {
 
     public String displayRubrum(){            //zmienić na zwracanie stringa
        StringBuilder sb = new StringBuilder();
-    //    String rubrum = new String();
-        //
+
        sb.append("Sygnatura: " + this.id +"\n");
        sb.append("Sygnatura: " + this.id + "\n");
-   //     rubrum.
-        sb.append("Data: " + this.receiptDate + "\n");
-        sb.append("Typ Sądu: " + this.courtType +"\n");
-        sb.append(displayAllJudges());
-        return sb.toString();
+       sb.append("Data: " + this.receiptDate + "\n");
+       sb.append("Typ Sądu: " + this.courtType +"\n");
+       sb.append(displayAllJudges());
+       return sb.toString();
     }
 
     private String displayAllJudges(){
@@ -50,6 +48,10 @@ public class Judgment {
             sb.append(j.displayJudge()+"\n");
         }
         return sb.toString();
+    }
+
+    public boolean equals(Judgment j){
+        return this.id == j.id;
     }
 
     public int getId() {

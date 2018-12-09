@@ -11,15 +11,17 @@ public class Main {
         jsons = getter.getJSONStringsFromDirectory(directory);
         ListPrinter.jsonPrinter(jsons);
         System.out.println("json Size is" + jsons.size());
-        ListPrinter.printElemAtIndex(jsons, 0);
+//        ListPrinter.printElemAtIndex(jsons, 0);
         JudgmentCreator jCreator = new JudgmentCreator();
-        List<Judgment> judgments = new ArrayList<>();
-        judgments = jCreator.createAllJudgmentList(jsons);
+        List<Judgment> judgments = jCreator.createAllJudgmentList(jsons);
 //        judgments = jCreator.createJudgment(jsons.get(0));
-        Judgment toDisplayRubrum = judgments.get(3);
+        Judgment toDisplayRubrum = judgments.get(0);
         String toDisplay = toDisplayRubrum.displayRubrum();
-
         System.out.println(toDisplay);
+
+        JudgeMapCreator JMP = new JudgeMapCreator(judgments);
+        JMP.judgesPrinter();
+
     }
 }
 //C:/Users/JCobb/Desktop/Studia/Obiektowe/json

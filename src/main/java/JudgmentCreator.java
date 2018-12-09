@@ -15,7 +15,7 @@ public class JudgmentCreator {
     }
 
     public List<Judgment> createAllJudgmentList(List<String> stringJudgementList){
-        List<Judgment> judgments = new ArrayList<Judgment>();
+        List<Judgment> judgments = new ArrayList<>();
         for(String json : stringJudgementList){
             List<Judgment> listToAdd = createJudgment(json);
             for(Judgment j : listToAdd){
@@ -24,4 +24,7 @@ public class JudgmentCreator {
         }
         return judgments;
     }
+
+
+
 }
