@@ -1,7 +1,5 @@
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +8,7 @@ public class Judgment {
     private CourtType courtType;
     private List<ReferencedCourtCase> courtCases;
     private JudgmentType judgmentType;
-    private List<Judge> judges;
+    private List<JSONJudge> judges;
     private List<String> courtReporters;
     private String decision;
     private String summary;
@@ -31,7 +29,7 @@ public class Judgment {
     private List<DissentingOpinion> dissentingOpinions;
 
 
-    public String displayRubrum(){            //zmienić na zwracanie stringa
+    public String displayRubrum(){
        StringBuilder sb = new StringBuilder();
 
        sb.append("Sygnatura: " + this.id +"\n");
@@ -44,7 +42,7 @@ public class Judgment {
 
     private String displayAllJudges(){
         StringBuilder sb = new StringBuilder();
-        for (Judge j : this.judges){
+        for (JSONJudge j : this.judges){
             sb.append(j.displayJudge()+"\n");
         }
         return sb.toString();
@@ -86,11 +84,11 @@ public class Judgment {
         this.judgmentType = judgmentType;
     }
 
-    public List<Judge> getJudges() {
+    public List<JSONJudge> getJudges() {
         return judges;
     }
 
-    public void setJudges(List<Judge> judges) {
+    public void setJudges(List<JSONJudge> judges) {
         this.judges = judges;
     }
 

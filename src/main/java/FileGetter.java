@@ -16,9 +16,14 @@ public class FileGetter {
         return directory;
     }
 
+    public List<String> getHTMLStringsFromDirectory(String directory){
+        File folder = new File(directory);
+        return getFILEStrings(folder, FileType.html);
+    }
+
     public List<String> getJSONStringsFromDirectory(String directory) {
         File folder = new File(directory);
-        return getJSONStrings(folder);
+        return getFILEStrings(folder, FileType.json);
     }
 
 
@@ -32,37 +37,50 @@ public class FileGetter {
         }
     }
 
-    private List<String> getJSONStrings(final File folder) {
-        List<String> jsons = new ArrayList<String>();
+    private List<String> getFILEStrings(final File folder, FileType f) {
+        List<String> filess = new ArrayList<String>();
 
         for (final File fileEntry : folder.listFiles()) {
             String filename = fileEntry.getName();
             //System.out.println(filename);
-            if (filename.endsWith(".json")) {
+            if (filename.endsWith("." + f)) {
                 Path filePath = fileEntry.toPath();
                 try {
                     BufferedReader reader = Files.newBufferedReader(filePath);
-                    jsons.add(dropMetaData(reader.readLine()));
+                    if (f == FileType.json) {
+                        filess.add(dropMetaData(reader.readLine()));
+                    }
+                    else{
+                        StringBuilder builder = new StringBuilder();
+                        while(true){
+                            String a = reader.readLine();
+                            if(a==null){break;}
+                            builder.append(a);
+
+                        }
+                        filess.add(builder.toString());
+                    }
                     reader.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
             if (fileEntry.isDirectory()) {
-                getJSONStrings(fileEntry);
+                getFILEStrings(fileEntry, f);
             }
         }
-        return jsons;
+        return filess;
     }
 
-//    public void jsonPrinter(List<String> jsons) {
+
+    //    public void jsonPrinter(List<String> jsons) {
 //        for (String json : jsons) {
 //            System.out.println(json);
 //        }
 //    }
-    private String dropMetaData(String json){
-            int beg = json.indexOf("items") + 7;
-            int end = json.indexOf("queryTemplate") - 2;
-            return json.substring(beg,end);
+    private String dropMetaData(String json) {
+        int beg = json.indexOf("items") + 7;
+        int end = json.indexOf("queryTemplate") - 2;
+        return json.substring(beg, end);
     }
 }
