@@ -24,22 +24,24 @@ public class Main {
 //
 //        JudgeMapCreator JMP = new JudgeMapCreator(judgments);
 //        JMP.judgesPrinter();
-        List<String> html30 = getter.getHTMLStringsFromDirectory("C:/Users/JCobb/Desktop/Studia/Obiektowe/html/cbosa/10/04");
-        ListPrinter.jsonPrinter(html30);
-        HTMLParser htmlParser = new HTMLParser();
-        Document doc = htmlParser.createDocument(html30.get(0));
-        String title = htmlParser.getTitle(doc);
-        System.out.println(title);
-        String table = htmlParser.getSTH(doc);
-        System.out.println(table);
-
-
-        String a = htmlParser.getJudgmentDate(doc);
-
-        System.out.println(a);
-        htmlParser.listKeys(doc);
-        HTMLJudgment d = new HTMLJudgment();
-        d = htmlParser.buildJudgment(doc);
+        String toTakeHTLMFrom = "C:/Users/JCobb/Desktop/Studia/Obiektowe/html/cbosa";
+        List<String> html30 = getter.getHTMLStringsFromDirectory(toTakeHTLMFrom);
+        //ListPrinter.jsonPrinter(html30);
+//        HTMLParser htmlParser = new HTMLParser();
+//        Document doc = htmlParser.createDocument(html30.get(0));
+//        String title = htmlParser.getTitle(doc);
+//        System.out.println(title);
+//        String table = htmlParser.getSTH(doc);
+//        System.out.println(table);
+//
+//
+//        String a = htmlParser.getJudgmentDate(doc);
+//
+//        System.out.println(a);
+//        htmlParser.listKeys(doc);
+//        HTMLJudgment d = new HTMLJudgment();
+        DocumentListMaker maker = new DocumentListMaker();
+        List<HTMLJudgment> htmlJudgments = maker.buildList(html30);
 
     }
 }

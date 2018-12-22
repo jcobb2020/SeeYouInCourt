@@ -43,6 +43,9 @@ public class FileGetter {
         for (final File fileEntry : folder.listFiles()) {
             String filename = fileEntry.getName();
             //System.out.println(filename);
+            if (fileEntry.isDirectory()) {
+                filess.addAll(getFILEStrings(fileEntry, f));
+            }
             if (filename.endsWith("." + f)) {
                 Path filePath = fileEntry.toPath();
                 try {
@@ -65,9 +68,7 @@ public class FileGetter {
                     e.printStackTrace();
                 }
             }
-            if (fileEntry.isDirectory()) {
-                getFILEStrings(fileEntry, f);
-            }
+
         }
         return filess;
     }

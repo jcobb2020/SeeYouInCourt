@@ -10,6 +10,37 @@ public class HTMLJudgment implements IJudgment {
     private String descriptionSymbol;
     private String bodyOfComplaint;
     private String judgmentContents;
+    private String sentence;
+    private String grounds;
+
+    public String displayRubrum(){
+        return "rubrum";
+    }
+
+    public String displayAllJudges(){
+        StringBuilder builder = new StringBuilder();
+        for (Judge j : this.judges){
+            builder.append(j.getName() + " - " + j.getFunction() + "\n");
+        }
+        return builder.toString();
+    }
+
+    public String getSentence() {
+        return sentence;
+    }
+
+    public void setSentence(String sentence) {
+        this.sentence = sentence;
+    }
+
+    public String getGrounds() {
+        return grounds;
+    }
+
+    public void setGrounds(String grounds) {
+        this.grounds = grounds;
+    }
+
 
     public String getJudgmentContents() {
         return judgmentContents;
@@ -20,9 +51,7 @@ public class HTMLJudgment implements IJudgment {
     }
 
 
-    public String displayRubrum(){
-        return "rubrum";
-    }
+
 
     public LinkedList<Judge> getJudges() {
         return judges;
@@ -80,6 +109,5 @@ public class HTMLJudgment implements IJudgment {
     public void setJudgmentType(String judgmentType) {
         this.judgmentType = judgmentType;
     }
-
 
 }
