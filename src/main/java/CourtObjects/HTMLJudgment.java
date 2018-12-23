@@ -12,9 +12,21 @@ public class HTMLJudgment implements IJudgment {
     private String judgmentContents;
     private String sentence;
     private String grounds;
+    private String signature;
 
-    public String displayRubrum(){
-        return "rubrum";
+    public void displayRubrum(){
+        System.out.println(this.generateRubrum());
+    }
+
+
+    public String generateRubrum(){
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Sygnatura: " + this.signature + "\n");
+        sb.append("Data: " + this.judgmentDate + "\n");
+        sb.append("Typ Sądu: " + this.court +"\n");
+        sb.append(displayAllJudges());
+        return sb.toString();
     }
 
     public String displayAllJudges(){
@@ -108,6 +120,14 @@ public class HTMLJudgment implements IJudgment {
 
     public void setJudgmentType(String judgmentType) {
         this.judgmentType = judgmentType;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
     }
 
 }

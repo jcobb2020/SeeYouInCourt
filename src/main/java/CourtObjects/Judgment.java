@@ -3,7 +3,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import java.util.Map;
 
-public class Judgment {
+public class Judgment implements IJudgment {
     private int id;
     private CourtType courtType;
     private List<ReferencedCourtCase> courtCases;
@@ -29,23 +29,29 @@ public class Judgment {
     private List<DissentingOpinion> dissentingOpinions;
 
 
-    public String displayRubrum(){
+    public void displayRubrum(){
+        System.out.println(this.generateRubrum());
+    }
+
+    public String generateRubrum(){
        StringBuilder sb = new StringBuilder();
 
-       sb.append("Sygnatura: " + this.id +"\n");
-       sb.append("Sygnatura: " + this.id + "\n");
+       sb.append("Sygnatura: " + getCaseSignature() + "\n");
        sb.append("Data: " + this.receiptDate + "\n");
        sb.append("Typ Sądu: " + this.courtType +"\n");
        sb.append(displayAllJudges());
        return sb.toString();
     }
 
-    private String displayAllJudges(){
+    public String displayAllJudges(){
         StringBuilder sb = new StringBuilder();
         for (JSONJudge j : this.judges){
             sb.append(j.displayJudge()+"\n");
         }
         return sb.toString();
+    }
+    public String getCaseSignature(){
+        return this.courtCases.get(0).getCaseNumber();
     }
 
     public boolean equals(Judgment j){

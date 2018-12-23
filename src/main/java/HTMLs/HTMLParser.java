@@ -111,6 +111,9 @@ public class HTMLParser {
                 judgment.setGrounds(sentenceAndGrounds.get(1).toString());
             }
         }
+        String Signature = document.title().split("-")[0];
+        Signature = Signature.substring(0, Signature.length() - 1);
+        judgment.setSignature(Signature);
         return judgment;
     }
 

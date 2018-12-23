@@ -4,13 +4,15 @@ import org.jsoup.*;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.*;
 
+
 public class Main {
 
     public static void main(String[] args){
         FileGetter getter = new FileGetter();
-//        List<String> jsons;                         //judgement list contained as strings
+        List<String> jsons;                         //judgement list contained as strings
 //
 //        String directory = getter.getDirectory();
+//        String directory =  "C:/Users/JCobb/Desktop/Studia/Obiektowe/json";
 //        jsons = getter.getJSONStringsFromDirectory(directory);
 //        ListPrinter.jsonPrinter(jsons);
 //        System.out.println("json Size is" + jsons.size());
@@ -19,14 +21,14 @@ public class Main {
 //        List<Judgment> judgments = jCreator.createAllJudgmentList(jsons);
 ////        judgments = jCreator.createJudgment(jsons.get(0));
 //        Judgment toDisplayRubrum = judgments.get(0);
-//        String toDisplay = toDisplayRubrum.displayRubrum();
+ //       String toDisplay = toDisplayRubrum.displayRubrum();
 //        System.out.println(toDisplay);
 //
-//        JudgeMapCreator JMP = new JudgeMapCreator(judgments);
+//        JudgeMapCreator2 JMP = new JudgeMapCreator2(judgments);
 //        JMP.judgesPrinter();
         String toTakeHTLMFrom = "C:/Users/JCobb/Desktop/Studia/Obiektowe/html/cbosa";
         List<String> html30 = getter.getHTMLStringsFromDirectory(toTakeHTLMFrom);
-        //ListPrinter.jsonPrinter(html30);
+        ListPrinter.jsonPrinter(html30);
 //        HTMLParser htmlParser = new HTMLParser();
 //        Document doc = htmlParser.createDocument(html30.get(0));
 //        String title = htmlParser.getTitle(doc);

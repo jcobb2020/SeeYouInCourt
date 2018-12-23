@@ -3,13 +3,13 @@ import java.util.LinkedList;
 import java.util.List;
 //import CourtObjects;
 
-public class JudgeMapCreator {
+public class JudgeMapCreator2 {
     private List<Judgment> judgments;
     private List<JSONJudge> judges;
     public HashMap<JSONJudge, List<Judgment>> judgeJudgments;
 
 
-    public JudgeMapCreator(List<Judgment> judgs){
+    public JudgeMapCreator2(List<Judgment> judgs){
         this.judgments = judgs;
         createJudgeJudgementsMap();
     }
@@ -34,7 +34,7 @@ public class JudgeMapCreator {
         }
     }
 
-    public void judgesPrinter(){
+    public void printJudges(){
 
         for(JSONJudge j : judges){
             int x = this.judgeJudgments.get(j).size();

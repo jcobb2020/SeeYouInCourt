@@ -7,6 +7,9 @@ public class Judge {
         return this.name;
     }
 
+    public Judge(){
+        this.setFunction("");
+    }
     @Override
     public boolean equals(Object o){
         if(!(o instanceof Judge))
