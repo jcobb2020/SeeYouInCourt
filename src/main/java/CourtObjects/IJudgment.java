@@ -5,5 +5,14 @@ public interface IJudgment {
 
     public String displayAllJudges();
 
+    public String getCaseSignature();
+
+    public String getDate();
+
+    public CourtType getCourtType();
+
+    public List<IJudge> getJudges();
+
+
 
 }

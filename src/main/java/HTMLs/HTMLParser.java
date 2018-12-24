@@ -4,6 +4,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.*;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class HTMLParser {
     public Document createDocument(String html) {
@@ -62,7 +63,10 @@ public class HTMLParser {
     }
 
     private LinkedList<Judge> makeJudgesList(String judgesString) {
-        String[] judges = judgesString.split("br/");
+        judgesString = judgesString.replace("<td class=\"info-list-value\">", "");
+        judgesString = judgesString.replace("</td>", "");
+        judgesString = judgesString.trim();
+        String[] judges = judgesString.split("<br>");
         LinkedList<Judge> judges1 = new LinkedList<>();
         for (String judge : judges) {
             Judge toAdd = new Judge();
@@ -70,10 +74,11 @@ public class HTMLParser {
                 String[] nameAndType = judge.split("/");
                 toAdd.setName(nameAndType[0]);
                 toAdd.setFunction(nameAndType[1]);
-                judges1.add(toAdd);
             } else {
                 toAdd.setName(judge);
             }
+            judges1.add(toAdd);
+
         }
         return judges1;
     }
@@ -82,6 +87,9 @@ public class HTMLParser {
         HTMLJudgment judgment = new HTMLJudgment();
         Elements values = getValues(document);
         Elements keys = getKeys(document);
+        LinkedList<Judge> empty = new LinkedList<Judge>();
+
+        judgment.setJudges(makeJudgesList("empty judge"));
         int i = 0;
         for (Element key : keys) {
             String keyString = key.text();
@@ -93,7 +101,8 @@ public class HTMLParser {
                 judgment.setCourt(cleanHTMLString(values.get(i).toString()));
 
             } else if (keyString.equals("Sędziowie")) {
-                judgment.setJudges(makeJudgesList(values.get(i).text()));
+
+                judgment.setJudges(makeJudgesList(values.get(i).toString()));
 
             } else if (keyString.equals("Symbol z opisem")) {
                 judgment.setDescriptionSymbol(cleanHTMLString(values.get(i).text()));
@@ -113,7 +122,11 @@ public class HTMLParser {
         }
         String Signature = document.title().split("-")[0];
         Signature = Signature.substring(0, Signature.length() - 1);
-        judgment.setSignature(Signature);
+        judgment.setCaseSignature(Signature);
+        if(judgment.getCourt().contains("Naczelny") || judgment.getCourt().contains("naczelny")){
+            judgment.setCourtType(CourtType.SUPREME_ADMINISTRATIVE_COURT);
+        }
+        else judgment.setCourtType(CourtType.ADMINISTRATIVE);
         return judgment;
     }
 

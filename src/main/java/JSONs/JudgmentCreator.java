@@ -3,6 +3,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class JudgmentCreator {
@@ -25,6 +26,13 @@ public class JudgmentCreator {
         return judgments;
     }
 
+    public List<IJudgment> convertToInterface(List<Judgment> judgments){
+        List<IJudgment> iJudgments = new LinkedList<>();
+        for (Judgment judgment : judgments){
+            iJudgments.add(judgment);
+        }
+        return iJudgments;
+    }
 
 
 }

@@ -1,5 +1,6 @@
 import com.google.gson.annotations.SerializedName;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,10 @@ public class Judgment implements IJudgment {
     private List<DissentingOpinion> dissentingOpinions;
 
 
+    public String getDate(){
+        return getReceiptDate();
+    }
+
     public void displayRubrum(){
         System.out.println(this.generateRubrum());
     }
@@ -45,11 +50,13 @@ public class Judgment implements IJudgment {
 
     public String displayAllJudges(){
         StringBuilder sb = new StringBuilder();
-        for (JSONJudge j : this.judges){
+        for (IJudge j : this.judges){
             sb.append(j.displayJudge()+"\n");
         }
         return sb.toString();
     }
+
+
     public String getCaseSignature(){
         return this.courtCases.get(0).getCaseNumber();
     }
@@ -68,7 +75,7 @@ public class Judgment implements IJudgment {
 
     public CourtType getCourtType() {
         return courtType;
-    }
+    }               //used in interface
 
     public void setCourtType(CourtType courtType) {
         this.courtType = courtType;
@@ -90,8 +97,12 @@ public class Judgment implements IJudgment {
         this.judgmentType = judgmentType;
     }
 
-    public List<JSONJudge> getJudges() {
-        return judges;
+    public List<IJudge> getJudges() {
+        List<IJudge> judgs= new LinkedList<>();
+        for(JSONJudge jugde : this.judges){
+            judgs.add(jugde);
+        }
+        return judgs;
     }
 
     public void setJudges(List<JSONJudge> judges) {

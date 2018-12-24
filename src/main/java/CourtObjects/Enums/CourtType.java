@@ -6,8 +6,10 @@ public enum CourtType {
 
     ADMINISTRATIVE, // sąd administracyjny
 
+    SUPREME_ADMINISTRATIVE_COURT, //naczelny sąd adminitracyjny
+
     CONSTITUTIONAL_TRIBUNAL, // Trybunał Konstytucyjny
 
-    NATIONAL_APPEAL_CHAMBER, // Krajowa Izba Odwoławcza
+    NATIONAL_APPEAL_CHAMBER // Krajowa Izba Odwoławcza
 }
 

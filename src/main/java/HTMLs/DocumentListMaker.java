@@ -21,4 +21,12 @@ public class DocumentListMaker {
         }
         return judgments;
     }
+
+    public List<IJudgment> buildIJudgementList(List<HTMLJudgment> judgments){
+        List<IJudgment> judgs = new LinkedList<>();
+        for(HTMLJudgment j : judgments){
+            judgs.add(j);
+        }
+        return judgs;
+    }
 }

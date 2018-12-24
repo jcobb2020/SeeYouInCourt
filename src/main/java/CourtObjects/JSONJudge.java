@@ -1,9 +1,9 @@
 import java.util.List;
 
-public class JSONJudge extends Judge {
+public class JSONJudge extends Judge implements IJudge{
     private List<SpecialRoles> specialRoles;
 
-
+    @Override
     public String displayJudge() {
         StringBuilder sb = new StringBuilder();
         sb.append("Name: " + name +"\n");
@@ -28,12 +28,12 @@ public class JSONJudge extends Judge {
 
 
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        for (int i = 0; i < name.length(); i++) {
-            hash = hash*31 + name.charAt(i);
-        }
-        return hash;
-    }
+//    @Override
+//    public int hashCode() {
+//        int hash = 7;
+//        for (int i = 0; i < name.length(); i++) {
+//            hash = hash*31 + name.charAt(i);
+//        }
+//        return hash;
+//    }
 }

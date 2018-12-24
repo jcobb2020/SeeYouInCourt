@@ -1,4 +1,4 @@
-public class Judge {
+public class Judge implements IJudge{
 
     protected String name;
     protected String function;
@@ -21,6 +21,22 @@ public class Judge {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        for (int i = 0; i < name.length(); i++) {
+            hash = hash*31 + name.charAt(i);
+        }
+        return hash;
+    }
+
+    public String displayJudge(){
+        StringBuilder builder = new StringBuilder();
+        builder.append("name: " + this.name + "\n");
+        builder.append("function: " + this.function + "\n");
+        return builder.toString();
     }
 
     public void setName(String name) {
