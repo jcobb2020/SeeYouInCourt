@@ -68,7 +68,6 @@ public class FileGetter {
                     e.printStackTrace();
                 }
             }
-
         }
         return filess;
     }

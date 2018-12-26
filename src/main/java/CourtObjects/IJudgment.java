@@ -13,6 +13,8 @@ public interface IJudgment {
 
     public List<IJudge> getJudges();
 
+    public String getGrounds();
+
 
 
 }

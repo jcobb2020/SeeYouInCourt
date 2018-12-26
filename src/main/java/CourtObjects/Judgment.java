@@ -29,6 +29,9 @@ public class Judgment implements IJudgment {
     private List<Chamber> chambers;
     private List<DissentingOpinion> dissentingOpinions;
 
+    public String getGrounds(){
+        return getTextContent();
+    }
 
     public String getDate(){
         return getReceiptDate();
@@ -45,6 +48,7 @@ public class Judgment implements IJudgment {
        sb.append("Data: " + this.receiptDate + "\n");
        sb.append("Typ Sądu: " + this.courtType +"\n");
        sb.append(displayAllJudges());
+
        return sb.toString();
     }
 

@@ -7,7 +7,7 @@ public class JSONJudge extends Judge implements IJudge{
     public String displayJudge() {
         StringBuilder sb = new StringBuilder();
         sb.append("Name: " + name +"\n");
-        System.out.println("Function: " + function + "\n");
+        sb.append("Function: " + this.function + "\n");
         sb.append(this.displaySpecialRoles());
         return sb.toString();
     }
@@ -16,7 +16,7 @@ public class JSONJudge extends Judge implements IJudge{
         StringBuilder sb = new StringBuilder();
         sb.append("Special Roles: \n");
         for (SpecialRoles role : specialRoles) {
-             sb.append(specialRoles + "\n");
+             sb.append(role + "\n");
         }
         sb.append("----");
         return sb.toString();

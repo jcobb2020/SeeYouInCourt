@@ -10,4 +10,10 @@ public class ListPrinter {
     public static void printElemAtIndex(List<String> jsons, int index){
         System.out.println(jsons.get(index));
     }
+
+    public static void signaturePrinter(List<IJudgment> judgments){
+        for (IJudgment judgment:judgments){
+            System.out.println(judgment.getCaseSignature());
+        }
+    }
 }
