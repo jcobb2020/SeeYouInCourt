@@ -1,3 +1,7 @@
+package Commands;
+
+import CourtObjects.IJudgment;
+
 import java.util.List;
 
 public class Rubrum {

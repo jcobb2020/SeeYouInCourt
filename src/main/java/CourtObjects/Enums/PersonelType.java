@@ -1,3 +1,5 @@
+package CourtObjects.Enums;
+
 public enum PersonelType {
     ONE_PERSON, // skład jednoosobowy
 

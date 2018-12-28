@@ -1,3 +1,5 @@
+package CourtObjects.Enums;
+
 public enum JudgmentType {
     DECISION, // postanowienie
     RESOLUTION,  //uchwała

@@ -1,3 +1,5 @@
+package FileGetters;
+
 import com.google.gson.stream.JsonReader;
 
 import java.io.*;

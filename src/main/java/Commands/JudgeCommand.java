@@ -1,3 +1,10 @@
+package Commands;
+
+import CollectionUtilities.ListPrinter;
+import CourtObjects.IJudge;
+import CourtObjects.IJudgment;
+
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -19,6 +26,7 @@ public class JudgeCommand {
 
     public void displayJudgeJudgments(List<IJudgment> judgments, String name){
         List<IJudgment> toDisplay = judgeJudgments(judgments, name);
+
         ListPrinter.signaturePrinter(toDisplay);
     }
 

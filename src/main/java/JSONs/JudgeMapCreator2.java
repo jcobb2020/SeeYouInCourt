@@ -1,3 +1,7 @@
+package JSONs;
+import CourtObjects.JSONJudge;
+import CourtObjects.Judgment;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;

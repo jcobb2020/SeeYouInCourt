@@ -1,23 +1,24 @@
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
-import org.jsoup.*;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.*;
+
+import CollectionUtilities.JudgmentListCreator;
+import Commands.JudgeCommand;
+import Commands.JudgesCommand;
+import Commands.Month;
+import CourtObjects.IJudgment;
 
 
 public class Main {
 
     public static void main(String[] args){
-//        FileGetter getter = new FileGetter();
+//        FileGetters.FileGetter getter = new FileGetters.FileGetter();
 //        List<String> jsons;                         //judgement list contained as strings
 ////
 ////        String directory = getter.getDirectory();
 //        String directory =  "C:/Users/JCobb/Desktop/Studia/Obiektowe/json";
 //        jsons = getter.getJSONStringsFromDirectory(directory);
-////        ListPrinter.jsonPrinter(jsons);
+////        CollectionUtilities.ListPrinter.jsonPrinter(jsons);
 ////        System.out.println("json Size is" + jsons.size());
-//////        ListPrinter.printElemAtIndex(jsons, 0);
+//////        CollectionUtilities.ListPrinter.printElemAtIndex(jsons, 0);
 //        JudgmentCreator jCreator = new JudgmentCreator();
 //        List<Judgment> judgments = jCreator.createAllJudgmentList(jsons);
 //        List<IJudgment> iJudgments = new LinkedList<>();
@@ -32,8 +33,8 @@ public class Main {
 ////        JMP.judgesPrinter();
 //        String toTakeHTLMFrom = "C:/Users/JCobb/Desktop/Studia/Obiektowe/html/cbosa";
 //        List<String> html30 = getter.getHTMLStringsFromDirectory(toTakeHTLMFrom);
-//        ListPrinter.jsonPrinter(html30);
-////        JudgeMapCreator JMP = new JudgeMapCreator(iJudgments);
+//        CollectionUtilities.ListPrinter.jsonPrinter(html30);
+////        CollectionUtilities.JudgeMapCreator JMP = new CollectionUtilities.JudgeMapCreator(iJudgments);
 //
 //        HTMLParser htmlParser = new HTMLParser();
 //        Document doc = htmlParser.createDocument(html30.get(1));
@@ -52,8 +53,8 @@ public class Main {
 //        List<IJudgment> allJudgements = new LinkedList<>();
 //        allJudgements.addAll(htmlIJudgments);
 //        allJudgements.addAll(iJudgments);
-////        JudgeMapCreator JMP2 = new JudgeMapCreator(htmlIJudgments);
-//        JudgeMapCreator JMP3 = new JudgeMapCreator(allJudgements);
+////        CollectionUtilities.JudgeMapCreator JMP2 = new CollectionUtilities.JudgeMapCreator(htmlIJudgments);
+//        CollectionUtilities.JudgeMapCreator JMP3 = new CollectionUtilities.JudgeMapCreator(allJudgements);
         JudgmentListCreator jlc = new JudgmentListCreator();
         String[] dirs = {"C:/Users/JCobb/Desktop/Studia/Obiektowe/json", "C:/Users/JCobb/Desktop/Studia/Obiektowe/html/cbosa"};
         LinkedList<IJudgment> judgements = jlc.buildIudgmentsFromDirs(dirs);
@@ -63,8 +64,12 @@ public class Main {
         //r.displayRubrum(judgements);
 //        Content c = new Content();
 //        c.displayContent(judgements);
-        JudgeCommand jc = new JudgeCommand();
-        jc.runJudgeCommand(judgements);
+//        JudgeCommand jc = new JudgeCommand();
+//        jc.runJudgeCommand(judgements);
+//        JudgesCommand jcs = new JudgesCommand();
+//        jcs.displayTopXJudges(judgements, 12);
+        Month month = new Month();
+        month.displayMonthStatistics(judgements);
     }
 }
 //C:/Users/JCobb/Desktop/Studia/Obiektowe/json

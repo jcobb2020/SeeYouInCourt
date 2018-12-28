@@ -1,3 +1,5 @@
+package CourtObjects.Enums;
+
 public enum SpecialRoles {
     PRESIDING_JUDGE, // przewodniczacy składu sędziowskiego
 

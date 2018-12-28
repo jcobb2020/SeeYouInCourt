@@ -1,3 +1,8 @@
+package CourtObjects;
+
+import CourtObjects.Enums.CourtType;
+import CourtObjects.Enums.JudgmentType;
+import CourtObjects.Enums.PersonelType;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.LinkedList;

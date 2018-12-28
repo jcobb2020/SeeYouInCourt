@@ -1,3 +1,5 @@
+package Commands;
+
 public enum Commands {
     rubrum, // - wyświetlenie metryki jednego lub wielu orzeczeń, na podstawie sygnatury (pierwsza wartość w polu courtCases lub ciąg "II SA/OI 472/18" w przypadku orzeczeń sądów administracyjnych)
     content, // - wyświetlenie uzasadnienia (czyli treści pola textContent lub treść od słowa "UZASADNIENIE")

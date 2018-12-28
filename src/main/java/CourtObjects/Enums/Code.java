@@ -1,3 +1,4 @@
+package CourtObjects.Enums;
 public enum Code {
     COMMON_COURT, // sąd powszechny
 

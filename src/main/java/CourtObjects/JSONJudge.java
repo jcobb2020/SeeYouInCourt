@@ -1,3 +1,7 @@
+package CourtObjects;
+
+import CourtObjects.Enums.SpecialRoles;
+
 import java.util.List;
 
 public class JSONJudge extends Judge implements IJudge{

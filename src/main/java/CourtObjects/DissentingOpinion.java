@@ -1,3 +1,5 @@
+package CourtObjects;
+
 import java.util.List;
 
 public class DissentingOpinion {

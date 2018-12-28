@@ -1,3 +1,5 @@
+package CourtObjects;
+
 public class Regulation {
     public String journalTitle;
     public int journalYear;

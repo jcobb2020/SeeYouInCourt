@@ -1,3 +1,6 @@
+package CourtObjects;
+import CourtObjects.Enums.CourtType;
+
 import java.util.List;
 
 public interface IJudgment {

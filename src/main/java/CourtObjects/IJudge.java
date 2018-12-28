@@ -1,3 +1,5 @@
+package CourtObjects;
+
 public interface IJudge {
 
 

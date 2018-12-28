@@ -1,3 +1,5 @@
+package CourtObjects;
+
 public class Judge implements IJudge{
 
     protected String name;

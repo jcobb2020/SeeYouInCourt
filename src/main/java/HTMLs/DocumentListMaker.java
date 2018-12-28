@@ -1,3 +1,6 @@
+package HTMLs;
+import CourtObjects.HTMLJudgment;
+import CourtObjects.IJudgment;
 import org.jsoup.*;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

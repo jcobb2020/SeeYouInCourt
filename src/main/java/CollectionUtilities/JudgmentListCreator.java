@@ -1,3 +1,12 @@
+package CollectionUtilities;
+
+import CourtObjects.HTMLJudgment;
+import CourtObjects.IJudgment;
+import CourtObjects.Judgment;
+import FileGetters.FileGetter;
+import HTMLs.DocumentListMaker;
+import JSONs.JudgmentCreator;
+
 import java.util.LinkedList;
 import java.util.List;
 
