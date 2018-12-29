@@ -21,4 +21,6 @@ public class CaseSignaturesGetter {
         scanner.close();
         return signatures;
     }
+
+
 }

@@ -8,8 +8,8 @@ public enum Commands {
     months, // - wyświetlał liczbę orzeczeń w poszczególnych miesiącach (rozkład statystyczny)
     courts, // - wyświetlał liczbę orzeczeń ze względu na typ sądu (rozkład statystyczny)
     regulations, // - wyświetlał 10 najczęściej przywoływanych ustaw
-    jury,
-    WRONG;// - wyświetlał liczbę spraw przypadających na określony skład sędziowski (określoną liczbę sędziów)
+    jury,// - wyświetlał liczbę spraw przypadających na określony skład sędziowski (określoną liczbę sędziów)
+    WRONG;
 
     private static String generateHelp(){
         StringBuilder builder = new StringBuilder();

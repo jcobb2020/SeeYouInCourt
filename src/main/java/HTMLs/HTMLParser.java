@@ -1,4 +1,5 @@
 package HTMLs;
+
 import CourtObjects.Enums.CourtType;
 import CourtObjects.HTMLJudgment;
 import CourtObjects.Judge;
@@ -57,11 +58,10 @@ public class HTMLParser {
     }
 
     private void setDateAndType(HTMLJudgment judgment, String dateAndType) {
-        StringBuilder builder = new StringBuilder();
         String[] parts = dateAndType.split(" ");
-        if(parts.length>0) {
+        if (parts.length > 0) {
             judgment.setJudgmentDate(parts[0]);
-            if(parts.length>1) {
+            if (parts.length > 1) {
                 judgment.setJudgmentType(parts[1]);
             }
         }
@@ -117,8 +117,7 @@ public class HTMLParser {
                 judgment.setBodyOfComplaint(cleanHTMLString(values.get(i).text()));
             } else if (keyString.equals("Treść wyniku")) {
                 judgment.setJudgmentContents(cleanHTMLString(values.get(i).text()));
-            }
-            else if(keyString.equals("Powołane przepisy")){
+            } else if (keyString.equals("Powołane przepisy")) {
                 Element regulations = values.get(i);
                 setRegulations(judgment, regulations);
             }
@@ -134,10 +133,9 @@ public class HTMLParser {
         String Signature = document.title().split("-")[0];
         Signature = Signature.substring(0, Signature.length() - 1);
         judgment.setCaseSignature(Signature);
-        if(judgment.getCourt().contains("Naczelny") || judgment.getCourt().contains("naczelny")){
+        if (judgment.getCourt().contains("Naczelny") || judgment.getCourt().contains("naczelny")) {
             judgment.setCourtType(CourtType.SUPREME_ADMINISTRATIVE_COURT);
-        }
-        else judgment.setCourtType(CourtType.ADMINISTRATIVE);
+        } else judgment.setCourtType(CourtType.ADMINISTRATIVE);
         return judgment;
     }
 
@@ -153,25 +151,24 @@ public class HTMLParser {
         return toClean;
     }
 
-    private void setRegulations(HTMLJudgment judgment, Element regulationsElement){
+    private void setRegulations(HTMLJudgment judgment, Element regulationsElement) {
         String regulations = regulationsElement.text();
         ReferencedRegulation RR = new ReferencedRegulation();
         String[] splitsDzU = regulations.split("Dz.U. ");
         String[] splitsNR = splitsDzU[1].split(" nr ");
         RR.setYear(Integer.parseInt(splitsNR[0]));
         String[] splitsPoz = splitsNR[1].split(" poz ");
-        try{RR.setNr(Integer.parseInt(splitsPoz[0]));}
-        catch (NumberFormatException e){
+        try {
+            RR.setNr(Integer.parseInt(splitsPoz[0]));
+        } catch (NumberFormatException e) {
             RR.setNr(0);
         }
         try {
             String[] splitsArt = splitsPoz[1].split(" art.");
             RR.setPoz(Integer.parseInt(splitsArt[0]));
-        }
-        catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             RR.setPoz(0);
-        }
-        catch (ArrayIndexOutOfBoundsException a){
+        } catch (ArrayIndexOutOfBoundsException a) {
             RR.setPoz(0);
         }
         List<ReferencedRegulation> RRs = new LinkedList<>();

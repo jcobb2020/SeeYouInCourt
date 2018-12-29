@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class App extends JFrame {
 
     private JTextField input;
-    private JLabel output;
+    private JTextArea output;
     private String prompt = "> ";
     private KeyListener listener;
     private String order;
@@ -37,15 +37,13 @@ public class App extends JFrame {
         setLayout(new GridLayout(2, 1));
         setBackground(Color.BLACK);
         setForeground(Color.BLACK);
-        output = new JLabel("");
+        output = new JTextArea("");
         input = new JTextField("");
         output.setBackground(Color.BLACK);
         output.setForeground(Color.BLUE);
         input.setAlignmentY(700);
         add(output);
         add(input);
-        String a = output.getText();
-        System.out.println(a);
         setVisible(true);
         // add(new JButton("XDD"));
         ArrayList<String> dirs = new ArrayList<>();
@@ -63,7 +61,7 @@ public class App extends JFrame {
         });
     }
 
-    public void doThing(String line) {
+    private void doThing(String line) {
         if (line.substring(0, 5).equals("load ")) {
             line = line.substring(4);
             String[] directories = line.split(" ");
@@ -73,6 +71,7 @@ public class App extends JFrame {
             String[] command = line.split(" ");
             if (Commands.parser(command[0]) == Commands.rubrum) {
                 Rubrum r = new Rubrum();
+
                 r.displayRubrum2(judgmentList, command);
             }
             if (Commands.parser(command[0]) == Commands.regulations) {
@@ -81,7 +80,7 @@ public class App extends JFrame {
             }
             if (Commands.parser(command[0]) == Commands.months) {
                 Month month = new Month();
-                month.displayMonthStatistics(judgmentList);
+                output.setText(month.bouildMonthsString(judgmentList));
             }
             if (Commands.parser(command[0]) == Commands.content) {
                 Content con = new Content();

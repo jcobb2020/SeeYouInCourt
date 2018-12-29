@@ -31,4 +31,17 @@ public class Content {
             }
         }
     }
+
+//    public String buildContent(List<IJudgment> judgments, String[] signatures2){
+//        List<String> signatures = new LinkedList<>();
+//        signatures = Arrays.asList(signatures2);
+//        signatures.remove(0);
+//        for (IJudgment judgment : judgments){
+//            for(String signature : signatures){
+//                if(signature.equals(judgment.getCaseSignature())){
+//
+//                }
+//            }
+//        }
+//    }
 }

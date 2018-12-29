@@ -32,4 +32,18 @@ public class Rubrum {
             }
         }
     }
+    public String CreateRubrums(List<IJudgment> judgments, String[] signatures2){
+        List<String> signatures = new LinkedList<>();
+        signatures = Arrays.asList(signatures2);
+        signatures.remove(0);
+        StringBuilder builder = new StringBuilder();
+        for (IJudgment judgment : judgments){
+            for(String signature : signatures){
+                if(signature.equals(judgment.getCaseSignature())){
+                    builder.append(judgment.generateRubrum() + "\n");
+                }
+            }
+        }
+        return builder.toString();
+    }
 }

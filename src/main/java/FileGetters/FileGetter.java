@@ -41,35 +41,40 @@ public class FileGetter {
 
     private List<String> getFILEStrings(final File folder, FileType f) {
         List<String> filess = new ArrayList<String>();
+        try {
+            for (final File fileEntry : folder.listFiles()) {
+                String filename = fileEntry.getName();
+                //System.out.println(filename);
+                if (fileEntry.isDirectory()) {
+                    filess.addAll(getFILEStrings(fileEntry, f));
+                }
+                if (filename.endsWith("." + f)) {
+                    Path filePath = fileEntry.toPath();
+                    try {
+                        BufferedReader reader = Files.newBufferedReader(filePath);
+                        if (f == FileType.json) {
+                            filess.add(dropMetaData(reader.readLine()));
+                        } else {
+                            StringBuilder builder = new StringBuilder();
+                            while (true) {
+                                String a = reader.readLine();
+                                if (a == null) {
+                                    break;
+                                }
+                                builder.append(a);
 
-        for (final File fileEntry : folder.listFiles()) {
-            String filename = fileEntry.getName();
-            //System.out.println(filename);
-            if (fileEntry.isDirectory()) {
-                filess.addAll(getFILEStrings(fileEntry, f));
-            }
-            if (filename.endsWith("." + f)) {
-                Path filePath = fileEntry.toPath();
-                try {
-                    BufferedReader reader = Files.newBufferedReader(filePath);
-                    if (f == FileType.json) {
-                        filess.add(dropMetaData(reader.readLine()));
-                    }
-                    else{
-                        StringBuilder builder = new StringBuilder();
-                        while(true){
-                            String a = reader.readLine();
-                            if(a==null){break;}
-                            builder.append(a);
-
+                            }
+                            filess.add(builder.toString());
                         }
-                        filess.add(builder.toString());
+                        reader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                    reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
+        }
+        catch (NullPointerException e){
+            return filess;
         }
         return filess;
     }

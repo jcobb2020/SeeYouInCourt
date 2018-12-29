@@ -6,6 +6,8 @@ import java.util.List;
 public interface IJudgment {
     public void displayRubrum();
 
+    public String generateRubrum();
+
     public String displayAllJudges();
 
     public String getCaseSignature();
