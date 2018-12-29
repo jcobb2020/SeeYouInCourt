@@ -1,75 +1,60 @@
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Scanner;
 
+import AppFiles.App;
 import CollectionUtilities.JudgmentListCreator;
-import Commands.JudgeCommand;
-import Commands.JudgesCommand;
-import Commands.Month;
+import Commands.*;
 import CourtObjects.IJudgment;
+import java.awt.EventQueue;
+import javax.swing.*;
 
 
 public class Main {
 
     public static void main(String[] args){
-//        FileGetters.FileGetter getter = new FileGetters.FileGetter();
-//        List<String> jsons;                         //judgement list contained as strings
-////
-////        String directory = getter.getDirectory();
-//        String directory =  "C:/Users/JCobb/Desktop/Studia/Obiektowe/json";
-//        jsons = getter.getJSONStringsFromDirectory(directory);
-////        CollectionUtilities.ListPrinter.jsonPrinter(jsons);
-////        System.out.println("json Size is" + jsons.size());
-//////        CollectionUtilities.ListPrinter.printElemAtIndex(jsons, 0);
-//        JudgmentCreator jCreator = new JudgmentCreator();
-//        List<Judgment> judgments = jCreator.createAllJudgmentList(jsons);
-//        List<IJudgment> iJudgments = new LinkedList<>();
-//        iJudgments = jCreator.convertToInterface(judgments);
+
+//        JudgmentListCreator jlc = new JudgmentListCreator();
 //
-////        judgments = jCreator.createJudgment(jsons.get(0));
-////        Judgment toDisplayRubrum = judgments.get(0);
-// //       String toDisplay = toDisplayRubrum.displayRubrum();
-////        System.out.println(toDisplay);
-////
-////        JudgeMapCreator2 JMP = new JudgeMapCreator2(judgments);
-////        JMP.judgesPrinter();
-//        String toTakeHTLMFrom = "C:/Users/JCobb/Desktop/Studia/Obiektowe/html/cbosa";
-//        List<String> html30 = getter.getHTMLStringsFromDirectory(toTakeHTLMFrom);
-//        CollectionUtilities.ListPrinter.jsonPrinter(html30);
-////        CollectionUtilities.JudgeMapCreator JMP = new CollectionUtilities.JudgeMapCreator(iJudgments);
+//        ArrayList<String> dirs = new ArrayList<>();
+//        Scanner scanner = new Scanner(System.in);
+//        String directory = "";
+//        System.out.println("Input directory or input \"exit\" to exit");
+//        directory=scanner.nextLine();
+//        while (!directory.equals("exit")){
+//            dirs.add(directory);
+//            directory=scanner.nextLine();
+//        }
+////        scanner.close();
+//        String[] directories = new String[dirs.size()];
+//        directories = dirs.toArray(directories);
+
+//        String[] directories = {"C:/Users/JCobb/Desktop/Studia/Obiektowe/json", "C:/Users/JCobb/Desktop/Studia/Obiektowe/html/cbosa"};
 //
-//        HTMLParser htmlParser = new HTMLParser();
-//        Document doc = htmlParser.createDocument(html30.get(1));
-////        String title = htmlParser.getTitle(doc);
-////        System.out.println(title);
-////        String table = htmlParser.getSTH(doc);
-////        System.out.println(table);
-////        String a = htmlParser.getJudgmentDate(doc);
-////        System.out.println(a);
-////        htmlParser.listKeys(doc);
-////        HTMLJudgment d = new HTMLJudgment();
-//        HTMLJudgment d = htmlParser.buildJudgment(doc);
-//        DocumentListMaker maker = new DocumentListMaker();
-//        List<HTMLJudgment> htmlJudgments = maker.buildList(html30);
-//        List<IJudgment> htmlIJudgments = maker.buildIJudgementList(htmlJudgments);
-//        List<IJudgment> allJudgements = new LinkedList<>();
-//        allJudgements.addAll(htmlIJudgments);
-//        allJudgements.addAll(iJudgments);
-////        CollectionUtilities.JudgeMapCreator JMP2 = new CollectionUtilities.JudgeMapCreator(htmlIJudgments);
-//        CollectionUtilities.JudgeMapCreator JMP3 = new CollectionUtilities.JudgeMapCreator(allJudgements);
-        JudgmentListCreator jlc = new JudgmentListCreator();
-        String[] dirs = {"C:/Users/JCobb/Desktop/Studia/Obiektowe/json", "C:/Users/JCobb/Desktop/Studia/Obiektowe/html/cbosa"};
-        LinkedList<IJudgment> judgements = jlc.buildIudgmentsFromDirs(dirs);
-        String a = judgements.get(111).getCaseSignature();
-        String b = judgements.get(1120).getCaseSignature();
-        //Rubrum r = new Rubrum();
-        //r.displayRubrum(judgements);
-//        Content c = new Content();
-//        c.displayContent(judgements);
-//        JudgeCommand jc = new JudgeCommand();
-//        jc.runJudgeCommand(judgements);
-//        JudgesCommand jcs = new JudgesCommand();
-//        jcs.displayTopXJudges(judgements, 12);
-        Month month = new Month();
-        month.displayMonthStatistics(judgements);
+//        LinkedList<IJudgment> judgements = jlc.buildIJudgmentsFromDirs(directories);
+//        String a = judgements.get(111).getCaseSignature();
+//        String b = judgements.get(1120).getCaseSignature();
+//
+//
+//        Month month = new Month();
+//        month.displayMonthStatistics(judgements);
+//        Courts c = new Courts();
+//        c.displayStatistics(judgements);
+//        Regulations r = new Regulations();
+//        r.displayTop10(judgements);
+//        Jury j = new Jury();
+//        String juryNumber = j.displayJuryNumber(judgements);
+//        System.out.println(juryNumber);
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new App();
+            }
+        });
+        //App app = new App();
+        //app.displayText();
+
     }
 }
 //C:/Users/JCobb/Desktop/Studia/Obiektowe/json

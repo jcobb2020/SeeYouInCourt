@@ -2,6 +2,7 @@ package HTMLs;
 import CourtObjects.Enums.CourtType;
 import CourtObjects.HTMLJudgment;
 import CourtObjects.Judge;
+import CourtObjects.ReferencedRegulation;
 import org.jsoup.*;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -92,6 +93,8 @@ public class HTMLParser {
         Elements values = getValues(document);
         Elements keys = getKeys(document);
         LinkedList<Judge> empty = new LinkedList<Judge>();
+        List<ReferencedRegulation> refRegs = new LinkedList<>();
+        judgment.setRegulations(refRegs);
 
         judgment.setJudges(makeJudgesList("empty judge"));
         int i = 0;
@@ -114,6 +117,10 @@ public class HTMLParser {
                 judgment.setBodyOfComplaint(cleanHTMLString(values.get(i).text()));
             } else if (keyString.equals("Treść wyniku")) {
                 judgment.setJudgmentContents(cleanHTMLString(values.get(i).text()));
+            }
+            else if(keyString.equals("Powołane przepisy")){
+                Element regulations = values.get(i);
+                setRegulations(judgment, regulations);
             }
             i++;
         }
@@ -144,5 +151,31 @@ public class HTMLParser {
             }
         }
         return toClean;
+    }
+
+    private void setRegulations(HTMLJudgment judgment, Element regulationsElement){
+        String regulations = regulationsElement.text();
+        ReferencedRegulation RR = new ReferencedRegulation();
+        String[] splitsDzU = regulations.split("Dz.U. ");
+        String[] splitsNR = splitsDzU[1].split(" nr ");
+        RR.setYear(Integer.parseInt(splitsNR[0]));
+        String[] splitsPoz = splitsNR[1].split(" poz ");
+        try{RR.setNr(Integer.parseInt(splitsPoz[0]));}
+        catch (NumberFormatException e){
+            RR.setNr(0);
+        }
+        try {
+            String[] splitsArt = splitsPoz[1].split(" art.");
+            RR.setPoz(Integer.parseInt(splitsArt[0]));
+        }
+        catch (NumberFormatException e){
+            RR.setPoz(0);
+        }
+        catch (ArrayIndexOutOfBoundsException a){
+            RR.setPoz(0);
+        }
+        List<ReferencedRegulation> RRs = new LinkedList<>();
+        RRs.add(RR);
+        judgment.setRegulations(RRs);
     }
 }

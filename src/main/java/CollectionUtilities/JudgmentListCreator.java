@@ -13,7 +13,7 @@ import java.util.List;
 public class JudgmentListCreator {
 
 
-    public LinkedList<IJudgment> buildIudgmentsFromDirs(String[] directories) {
+    public LinkedList<IJudgment> buildIJudgmentsFromDirs(String[] directories) {
         FileGetter getter = new FileGetter();
         DocumentListMaker maker = new DocumentListMaker();
         JudgmentCreator jCreator = new JudgmentCreator();

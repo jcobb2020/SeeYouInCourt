@@ -253,4 +253,21 @@ public class Judgment implements IJudgment {
     public void setDissentingOpinions(List<DissentingOpinion> dissentingOpinions) {
         this.dissentingOpinions = dissentingOpinions;
     }
+
+    public List<ReferencedRegulation> createReferencedRegulationList(){
+        List<ReferencedRegulation> RRs = new LinkedList<>();
+        for(Regulation regulation : this.referencedRegulations){
+            ReferencedRegulation RR = createReferencedRegulation(regulation);
+            RRs.add(RR);
+        }
+        return RRs;
+    }
+
+    private ReferencedRegulation createReferencedRegulation(Regulation regulation){
+        ReferencedRegulation reg = new ReferencedRegulation();
+        reg.setNr(regulation.journalNo);
+        reg.setYear(regulation.journalYear);
+        reg.setPoz(regulation.journalEntry);
+        return reg;
+    }
 }

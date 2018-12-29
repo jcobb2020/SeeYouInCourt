@@ -19,10 +19,19 @@ public class HTMLJudgment implements IJudgment {
     private String sentence;
     private String grounds;
     private String caseSignature;
-
     private CourtType courtType;
 
+    public List<ReferencedRegulation> getRegulations() {
+        return regulations;
+    }
+
+    public void setRegulations(List<ReferencedRegulation> regulations) {
+        this.regulations = regulations;
+    }
+
+    private List<ReferencedRegulation> regulations;
     public List<IJudge> getJudges(){
+
 
         List<IJudge> judgs = new LinkedList<>();
         for (Judge judge : this.judges){
@@ -35,6 +44,9 @@ public class HTMLJudgment implements IJudgment {
             judgs.add(empty);
         }
         return judgs;
+    }
+    public List<ReferencedRegulation> createReferencedRegulationList(){
+        return this.regulations;
     }
 
     public void displayRubrum(){

@@ -18,6 +18,6 @@ public interface IJudgment {
 
     public String getGrounds();
 
-
+    public List<ReferencedRegulation> createReferencedRegulationList();
 
 }
