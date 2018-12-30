@@ -53,7 +53,6 @@ public class Judgment implements IJudgment {
        sb.append("Data: " + this.receiptDate + "\n");
        sb.append("Typ Sądu: " + this.courtType +"\n");
        sb.append(displayAllJudges());
-
        return sb.toString();
     }
 

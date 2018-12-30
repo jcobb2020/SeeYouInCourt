@@ -62,17 +62,18 @@ public class App extends JFrame {
     }
 
     private void doThing(String line) {
-        if (line.substring(0, 5).equals("load ")) {
+        if (line.substring(0, 5).equals("load ")) {         //C:/Users/JCobb/Desktop/Studia/Obiektowe/html/cbosa
             line = line.substring(4);
             String[] directories = line.split(" ");
             judgmentList = jlc.buildIJudgmentsFromDirs(directories);
         }
         else {
-            String[] command = line.split(" ");
+            String[] command = line.split(" ");   //ex SA/Rz 160/02
             if (Commands.parser(command[0]) == Commands.rubrum) {
                 Rubrum r = new Rubrum();
-
-                r.displayRubrum2(judgmentList, command);
+                String[] split = line.split(" ");
+                String toDisplay = r.createRubrums(judgmentList, split);
+                output.setText(toDisplay);
             }
             if (Commands.parser(command[0]) == Commands.regulations) {
                 Regulations regs = new Regulations();
