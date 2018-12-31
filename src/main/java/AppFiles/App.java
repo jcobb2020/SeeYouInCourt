@@ -9,6 +9,7 @@ import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.event.KeyAdapter;
+import java.util.LinkedList;
 import java.util.List;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -26,6 +27,8 @@ public class App extends JFrame {
     private JudgmentListCreator jlc;
     private FileGetter getter;
     private List<IJudgment> judgmentList;
+    private List<String> commandsInputed;
+    private int whichCommand;
 
 
     public App() {
@@ -41,7 +44,7 @@ public class App extends JFrame {
         setLayout(new GridLayout(2, 1));
         setBackground(Color.BLACK);
         setForeground(Color.BLACK);
-        output = new JTextArea(16,58);
+        output = new JTextArea(16, 58);
 //        outputPanel.setBorder ( new TitledBorder( new EtchedBorder(), "Output" ) );
         input = new JTextField(58);
 //        inputPanel.setBorder ( new TitledBorder( new EtchedBorder(), "Input" ) );
@@ -53,18 +56,20 @@ public class App extends JFrame {
         output.setLineWrap(true);
         add(output);
         add(input);
-        JScrollPane scroll = new JScrollPane (output);
+        JScrollPane scroll = new JScrollPane(output);
         add(scroll);
         output.setWrapStyleWord(true);
         output.setBackground(Color.BLACK);
         output.setForeground(Color.BLUE);
         output.setLineWrap(true);
         output.setWrapStyleWord(true);
+        commandsInputed = new LinkedList<>();
 //        input.setAlignmentY(700);
 //        outputPanel.add(output);
 //        inputPanel.add(input);
-        scroll.setVerticalScrollBarPolicy ( ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
+        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         setVisible(true);
+        whichCommand = 0;
         output.setText("please select directory or insert \"exit\" to exit");
         input.addKeyListener(new KeyAdapter() {
             @Override
@@ -72,19 +77,48 @@ public class App extends JFrame {
                 int keyCode = e.getKeyCode();
                 if (keyCode == 10) {
                     doThing(input.getText());
+                    commandsInputed.add(input.getText());
                     input.setText("");
+                    whichCommand = commandsInputed.size()-1 ;
+                }
+                if (keyCode == 38) {
+                    setInputTextFromHistory();
+                    whichCommand --;
+                    if(whichCommand<0){
+                        whichCommand = 0;
+                    }
+                }
+                if (keyCode == 40) {
+                    whichCommand++;
+                    setInputTextFromHistory();
                 }
             }
         });
     }
 
+    private void setInputTextFromHistory() {
+        if(commandsInputed.size() == 0){
+            return;
+        }
+        if (commandsInputed.size() <= whichCommand) {
+            input.setText(commandsInputed.get(commandsInputed.size() -1));
+            whichCommand = commandsInputed.size()-1;
+        }
+        if(whichCommand<0){
+            input.setText(commandsInputed.get(0));
+            whichCommand = 0;
+        }
+        else {
+            input.setText(commandsInputed.get(whichCommand));
+        }
+    }
+
     private void doThing(String line) {
-        if (line.length()> 5 && line.substring(0, 5).equals("load ")) {         //C:/Users/JCobb/Desktop/Studia/Obiektowe/html/cbosa
+        if (line.length() > 5 && line.substring(0, 5).equals("load ")) {         //C:/Users/JCobb/Desktop/Studia/Obiektowe/html/cbosa
             line = line.substring(4);
             String[] directories = line.split(" ");
             judgmentList = jlc.buildIJudgmentsFromDirs(directories);
-        }
-        else {
+        } else {
             String[] command = line.split(" ");                         //ex SA/Rz 160/02
             if (Commands.parser(command[0]) == Commands.rubrum) {
                 Rubrum r = new Rubrum();
@@ -118,7 +152,7 @@ public class App extends JFrame {
                 JudgesCommand judgesCommand = new JudgesCommand();
                 output.setText(judgesCommand.displayTopXJudges(judgmentList, 10));
             }
-            if(Commands.parser(command[0]) == Commands.jury){
+            if (Commands.parser(command[0]) == Commands.jury) {
                 Jury jury = new Jury();
                 output.setText(jury.displayJuryNumber(judgmentList));
             }
@@ -144,8 +178,7 @@ public class App extends JFrame {
 //    }
 
 
-
-    //    String line = input.getText();
+//    String line = input.getText();
 //                    input.setText("");
 //                    output.setText("pressedEnter");
 //                    if (line.substring(0, 5).equals("load ")) {
