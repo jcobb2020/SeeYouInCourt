@@ -8,14 +8,16 @@ import java.util.List;
 
 public class Courts {
 
-    public void displayStatistics(List<IJudgment> judgments) {
+    public String buildStatistics(List<IJudgment> judgments) {
         int courtTypeArray[] = {0, 0, 0, 0, 0, 0, 0};
+        StringBuilder builder = new StringBuilder();
         for(IJudgment judgment: judgments){
             CourtType ct = judgment.getCourtType();
             courtTypeArray[CourtType.parseToInt(ct)]++;
         }
         for (int i = 0; i<7; i++){
-            System.out.println(CourtType.parseFromInt(i) + ": " + courtTypeArray[i]);
+            builder.append(CourtType.parseFromInt(i) + ": " + courtTypeArray[i] + "\n");
         }
+        return builder.toString();
     }
 }

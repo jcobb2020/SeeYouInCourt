@@ -46,7 +46,7 @@ public enum Commands {
             case ("regulations"):
                 return Commands.regulations;
             case ("jury"):
-                return Commands.rubrum;
+                return Commands.jury;
             default:
                 return Commands.WRONG;
         }

@@ -107,17 +107,20 @@ public class App extends JFrame {
             }
             if (Commands.parser(command[0]) == Commands.courts) {
                 Courts courts = new Courts();
-                courts.displayStatistics(judgmentList);
+                output.setText(courts.buildStatistics(judgmentList));
             }
-            if (Commands.parser(command[0]) == Commands.judge) {
+            if (Commands.parser(command[0]) == Commands.judge) {            //Marian Ekiert
                 JudgeCommand judgeCommand = new JudgeCommand();
-                for (int i = 1; i < command.length; i++) {
-                    judgeCommand.displayJudgeJudgments(judgmentList, command[i]);
-                }
+                output.setText(judgeCommand.buildJudgeJudgements(judgmentList, command));
+
             }
             if (Commands.parser(command[0]) == Commands.judges) {
                 JudgesCommand judgesCommand = new JudgesCommand();
-                judgesCommand.displayTopXJudges(judgmentList, 10);
+                output.setText(judgesCommand.displayTopXJudges(judgmentList, 10));
+            }
+            if(Commands.parser(command[0]) == Commands.jury){
+                Jury jury = new Jury();
+                output.setText(jury.displayJuryNumber(judgmentList));
             }
             if (Commands.parser(command[0]) == Commands.WRONG) {
                 output.setText(Commands.generateHelp());

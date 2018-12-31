@@ -10,7 +10,7 @@ import java.util.*;
 
 public class JudgesCommand {
 
-    private void displayTop(HashMap<IJudge, List<IJudgment>> hashMap, int howMany) {
+    public String displayTop(HashMap<IJudge, List<IJudgment>> hashMap, int howMany) {
         TreeMap<Integer, LinkedList<IJudge>> treeMap = new TreeMap<>();
         for (IJudge judge : hashMap.keySet()) {
             LinkedList<IJudge> judges = new LinkedList<>();
@@ -19,20 +19,24 @@ public class JudgesCommand {
         for (IJudge judge : hashMap.keySet()) {
             treeMap.get(hashMap.get(judge).size()).add(judge);
         }
+        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < howMany;) {
             int lastKey = treeMap.lastKey();
             for (int j = treeMap.get(lastKey).size()-1; j >= 0; j--) {
-                System.out.println(treeMap.get(lastKey).get(j).displayJudge() + "cases amount " + lastKey);
+                builder.append(treeMap.get(lastKey).get(j).displayJudge() + "cases amount " + lastKey + "\n");
                 i++;
             }
             treeMap.remove(lastKey);
         }
+        return builder.toString();
     }
 
-    public void displayTopXJudges(List<IJudgment> judgments, int howMany) {
+    public String displayTopXJudges(List<IJudgment> judgments, int howMany) {
+        StringBuilder builder = new StringBuilder();
         JudgeMapCreator JMP = new JudgeMapCreator(judgments);
         HashMap<IJudge, List<IJudgment>> judgeJudgments =JMP.judgeJudgments;
-        displayTop(judgeJudgments, howMany);
+        builder.append(displayTop(judgeJudgments, howMany) + "\n");
+        return builder.toString();
     }
 }
 

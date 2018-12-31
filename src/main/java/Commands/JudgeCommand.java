@@ -5,6 +5,7 @@ import CourtObjects.IJudge;
 import CourtObjects.IJudgment;
 
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -28,6 +29,20 @@ public class JudgeCommand {
         List<IJudgment> toDisplay = judgeJudgments(judgments, name);
 
         ListPrinter.signaturePrinter(toDisplay);
+    }
+
+    public String buildJudgeJudgements(List<IJudgment> judgments, String[] names){
+        StringBuilder nameBuilder = new StringBuilder();
+        for(int i = 1; i<names.length; i++){
+            nameBuilder.append(names[i] + " ");
+        }
+        String name = nameBuilder.toString();
+        name = name.substring(0, name.length()-1);
+        List<IJudgment> judgeJudgments = judgeJudgments(judgments, name);
+        if (judgeJudgments.size()==0){
+            return "no cases found for " + name;
+        }
+        return judgeJudgments.size() + " cases found for " + name;
     }
 
     public void runJudgeCommand(List<IJudgment> judgments){
