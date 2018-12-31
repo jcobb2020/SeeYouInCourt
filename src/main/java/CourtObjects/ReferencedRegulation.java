@@ -34,10 +34,15 @@ public class ReferencedRegulation {
     }
 
     public void display(){
-        System.out.println("YEAR " + this.year);
-//        System.out.println("art " + this.art);
-        System.out.println("Nr " + this.nr);
-        System.out.println("Pos " + this.poz);
+        System.out.println(toString());
+    }
+
+    public String toString(){
+        StringBuilder builder = new StringBuilder();
+        builder.append("YEAR " + this.year + "\n");
+        builder.append("Nr " + this.nr + "\n");
+        builder.append("Pos " + this.poz + "\n");
+        return builder.toString();
     }
 
     @Override

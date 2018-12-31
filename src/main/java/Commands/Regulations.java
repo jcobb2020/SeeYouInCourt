@@ -23,7 +23,8 @@ public class Regulations {
         return rrOccurances;
     }
 
-    public void top10(HashMap<ReferencedRegulation, Integer> regulationOccurances) {
+    public String top10(HashMap<ReferencedRegulation, Integer> regulationOccurances) {
+        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < 10; i++) {
             int j = 0;
             ReferencedRegulation toReturn = new ReferencedRegulation();
@@ -33,15 +34,16 @@ public class Regulations {
                     j = regulationOccurances.get(RR);
                 }
             }
-            toReturn.display();
-            System.out.println(regulationOccurances.get(toReturn));
+            builder.append(toReturn.toString());
+            builder.append("occurances: " + regulationOccurances.get(toReturn) +"\n");
             regulationOccurances.remove(toReturn);
         }
+        return builder.toString();
     }
 
-    public void displayTop10(List<IJudgment> judgments){
+    public String buildTop10(List<IJudgment> judgments){
         HashMap<ReferencedRegulation, Integer> hashMap = regulationOccurances(judgments);
-        top10(hashMap);
+        return top10(hashMap);
     }
 
 }

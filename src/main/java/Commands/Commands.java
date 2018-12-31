@@ -11,43 +11,44 @@ public enum Commands {
     jury,// - wyświetlał liczbę spraw przypadających na określony skład sędziowski (określoną liczbę sędziów)
     WRONG;
 
-    private static String generateHelp(){
+    public static String generateHelp() {
         StringBuilder builder = new StringBuilder();
-        builder.append("rubrum,  - wyświetlenie metryki jednego lub wielu orzeczeń, na podstawie sygnatury (pierwsza wartość w polu courtCases lub ciąg \"II SA/OI 472/18\" w przypadku orzeczeń sądów administracyjnych");
-        builder.append("content,  - wyświetlenie uzasadnienia (czyli treści pola textContent lub treść od słowa \"UZASADNIENIE\"");
-        builder.append("judge,  - wyświetla liczbę orzeczeń dla wybranego sędziego");
-        builder.append("judges,  - wyświetla 10 sędziów, którzy wydali najwięcej orzeczeń");
-        builder.append("months,  - wyświetla liczbę orzeczeń w poszczególnych miesiącach (rozkład statystyczny)");
-        builder.append("courts,  - wyświetla liczbę orzeczeń ze względu na typ sądu (rozkład statystyczny");
-        builder.append("regulations,  - wyświetla 10 najczęściej przywoływanych ustaw");
-        builder.append("    jury - wyświetla liczbę spraw przypadających na określony skład sędziowski (określoną liczbę sędziów)");
+        builder.append("rubrum,  - wyświetlenie metryki jednego lub wielu orzeczeń, na podstawie sygnatury (pierwsza wartość w polu courtCases lub ciąg \"II SA/OI 472/18\" w przypadku orzeczeń sądów administracyjnych"+"\n");
+        builder.append("content,  - wyświetlenie uzasadnienia (czyli treści pola textContent lub treść od słowa \"UZASADNIENIE\""+"\n");
+        builder.append("judge,  - wyświetla liczbę orzeczeń dla wybranego sędziego"+"\n");
+        builder.append("judges,  - wyświetla 10 sędziów, którzy wydali najwięcej orzeczeń"+"\n");
+        builder.append("months,  - wyświetla liczbę orzeczeń w poszczególnych miesiącach (rozkład statystyczny)"+"\n");
+        builder.append("courts,  - wyświetla liczbę orzeczeń ze względu na typ sądu (rozkład statystyczny"+"\n");
+        builder.append("regulations,  - wyświetla 10 najczęściej przywoływanych ustaw"+"\n");
+        builder.append("    jury - wyświetla liczbę spraw przypadających na określony skład sędziowski (określoną liczbę sędziów)"+"\n");
         return builder.toString();
     }
 
-    public static void displayHelp(){
+    public static void displayHelp() {
         String help = generateHelp();
         System.out.println(help);
     }
 
-    public static Commands parser(String toParse){
-        switch (toParse.toLowerCase()){
-            case("rubrum"):
+    public static Commands parser(String toParse) {
+        switch (toParse.toLowerCase()) {
+            case ("rubrum"):
                 return Commands.rubrum;
-            case("content"):
+            case ("content"):
                 return Commands.content;
-            case("judge"):
+            case ("judge"):
                 return Commands.judge;
-            case("judges"):
+            case ("judges"):
                 return Commands.judges;
-            case("months"):
+            case ("months"):
                 return Commands.months;
-            case("courts"):
+            case ("courts"):
                 return Commands.courts;
-            case("regulations"):
+            case ("regulations"):
                 return Commands.regulations;
-            case("jury"):
+            case ("jury"):
                 return Commands.rubrum;
-            default: return Commands.WRONG;
+            default:
+                return Commands.WRONG;
         }
     }
 }
