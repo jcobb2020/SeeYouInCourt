@@ -9,6 +9,7 @@ import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.event.KeyAdapter;
+import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.awt.*;
@@ -29,7 +30,11 @@ public class App extends JFrame {
     private List<IJudgment> judgmentList;
     private List<String> commandsInputed;
     private int whichCommand;
-
+    private String directoryToWrite = "";
+    private boolean writeQuestionAnswered = false;
+    private boolean fileMade;
+    private PrintWriter writer;
+    private FileWriter w;
 
     public App() {
         jlc = new JudgmentListCreator();
@@ -70,21 +75,54 @@ public class App extends JFrame {
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         setVisible(true);
         whichCommand = 0;
-        output.setText("please select directory or insert \"exit\" to exit");
+
+        output.setText("please select directory to build file or press enter to continue");
         input.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 int keyCode = e.getKeyCode();
                 if (keyCode == 10) {
-                    doThing(input.getText());
-                    commandsInputed.add(input.getText());
-                    input.setText("");
-                    whichCommand = commandsInputed.size()-1 ;
+                    if (!writeQuestionAnswered) {
+                        directoryToWrite = input.getText();
+                        writeQuestionAnswered = true;
+                        if (directoryToWrite.equals("")) {
+                            fileMade = false;
+                        } else {
+
+                            File file = new File(directoryToWrite);
+                            File actualFile = new File(file, "SeeYouInCourt.txt");
+                            try {
+                                w = new FileWriter(actualFile);
+                                writer = new PrintWriter(w);
+                                output.setText("file created");
+                                fileMade = true;
+                            } catch (FileNotFoundException fnfe) {
+                                output.setText("wrong file folder, file not created");
+                                fileMade = false;
+                                writeQuestionAnswered = false;
+                                directoryToWrite = "";
+                                fileMade = false;
+                            } catch (IOException ioe) {
+                                output.setText("sthWentWrong");
+                                fileMade = false;
+                                writeQuestionAnswered = false;
+                                directoryToWrite = "";
+                                fileMade = false;
+                            }
+                        }
+
+                        //build file in directory
+                    } else {
+                        doThing(input.getText());
+                        commandsInputed.add(input.getText());
+                        input.setText("");
+                        whichCommand = commandsInputed.size() - 1;
+                    }
                 }
                 if (keyCode == 38) {
                     setInputTextFromHistory();
-                    whichCommand --;
-                    if(whichCommand<0){
+                    whichCommand--;
+                    if (whichCommand < 0) {
                         whichCommand = 0;
                     }
                 }
@@ -97,18 +135,17 @@ public class App extends JFrame {
     }
 
     private void setInputTextFromHistory() {
-        if(commandsInputed.size() == 0){
+        if (commandsInputed.size() == 0) {
             return;
         }
         if (commandsInputed.size() <= whichCommand) {
-            input.setText(commandsInputed.get(commandsInputed.size() -1));
-            whichCommand = commandsInputed.size()-1;
+            input.setText(commandsInputed.get(commandsInputed.size() - 1));
+            whichCommand = commandsInputed.size() - 1;
         }
-        if(whichCommand<0){
+        if (whichCommand < 0) {
             input.setText(commandsInputed.get(0));
             whichCommand = 0;
-        }
-        else {
+        } else {
             input.setText(commandsInputed.get(whichCommand));
         }
     }
@@ -123,44 +160,90 @@ public class App extends JFrame {
             if (Commands.parser(command[0]) == Commands.rubrum) {
                 Rubrum r = new Rubrum();
                 String[] split = line.split(" ");
-                String toDisplay = r.createRubrums(judgmentList, split);
-                output.setText(toDisplay);
+                String result = r.createRubrums(judgmentList, split);
+                output.setText(result);
+                if (fileMade) {
+                    writer.println(result + "\n");
+                }
             }
             if (Commands.parser(command[0]) == Commands.regulations) {
                 Regulations regs = new Regulations();
-                output.setText(regs.buildTop10(judgmentList));
+                String result = regs.buildTop10(judgmentList);
+                output.setText(result);
+                if (fileMade) {
+                    writer.println(result + "\n");
+                }
             }
             if (Commands.parser(command[0]) == Commands.months) {
                 Month month = new Month();
-                output.setText(month.bouildMonthsString(judgmentList));
+                String result = month.bouildMonthsString(judgmentList);
+                output.setText(result);
+                if (fileMade) {
+                    writer.println(result + "\n");
+                }
             }
             if (Commands.parser(command[0]) == Commands.content) {
                 Content con = new Content();
-
-                output.setText(con.buildContent(judgmentList, command));
+                String result = con.buildContent(judgmentList, command);
+                output.setText(result);
+                if (fileMade) {
+                    writer.println(result + "\n");
+                }
             }
             if (Commands.parser(command[0]) == Commands.courts) {
                 Courts courts = new Courts();
-                output.setText(courts.buildStatistics(judgmentList));
+                String result = courts.buildStatistics(judgmentList);
+                output.setText(result);
+                if (fileMade) {
+                    writer.println(result + "\n");
+                }
+
             }
             if (Commands.parser(command[0]) == Commands.judge) {            //Marian Ekiert
                 JudgeCommand judgeCommand = new JudgeCommand();
-                output.setText(judgeCommand.buildJudgeJudgements(judgmentList, command));
-
+                String result = judgeCommand.buildJudgeJudgements(judgmentList, command);
+                output.setText(result);
+                if (fileMade) {
+                    writer.println(result + "\n");
+                }
             }
             if (Commands.parser(command[0]) == Commands.judges) {
                 JudgesCommand judgesCommand = new JudgesCommand();
-                output.setText(judgesCommand.displayTopXJudges(judgmentList, 10));
+                String result = judgesCommand.displayTopXJudges(judgmentList, 10);
+                output.setText(result);
+                if (fileMade) {
+                    writer.println(result + "\n");
+                }
+
             }
             if (Commands.parser(command[0]) == Commands.jury) {
                 Jury jury = new Jury();
-                output.setText(jury.displayJuryNumber(judgmentList));
+                String result = jury.displayJuryNumber(judgmentList);
+                output.setText(result);
+                if (fileMade) {
+                    writer.println(result + "\n");
+                    writer.close();
+                }
+
             }
             if (Commands.parser(command[0]) == Commands.WRONG) {
-                output.setText(Commands.generateHelp());
+                String result = Commands.generateHelp();
+                output.setText(result);
+                if (fileMade) {
+                    writer.println(result + "\n");
+                }
             }
+            if (Commands.parser(command[0]) == Commands.save) {
+                if (fileMade) {
+                    writer.close();
+
+                }
+                System.exit(0);
+            }
+
         }
     }
+
 }
 
 //        directory=last;

@@ -8,7 +8,8 @@ public enum Commands {
     months, // - wyświetlał liczbę orzeczeń w poszczególnych miesiącach (rozkład statystyczny)
     courts, // - wyświetlał liczbę orzeczeń ze względu na typ sądu (rozkład statystyczny)
     regulations, // - wyświetlał 10 najczęściej przywoływanych ustaw
-    jury,// - wyświetlał liczbę spraw przypadających na określony skład sędziowski (określoną liczbę sędziów)
+    jury, // - wyświetlał liczbę spraw przypadających na określony skład sędziowski (określoną liczbę sędziów)
+    save,
     WRONG;
 
     public static String generateHelp() {
@@ -21,6 +22,7 @@ public enum Commands {
         builder.append("courts,  - wyświetla liczbę orzeczeń ze względu na typ sądu (rozkład statystyczny"+"\n");
         builder.append("regulations,  - wyświetla 10 najczęściej przywoływanych ustaw"+"\n");
         builder.append("    jury - wyświetla liczbę spraw przypadających na określony skład sędziowski (określoną liczbę sędziów)"+"\n");
+        builder.append("save - zapisuje stworzony dokument i opuszcza program");
         return builder.toString();
     }
 
@@ -47,6 +49,8 @@ public enum Commands {
                 return Commands.regulations;
             case ("jury"):
                 return Commands.jury;
+            case("save"):
+                return  Commands.save;
             default:
                 return Commands.WRONG;
         }
