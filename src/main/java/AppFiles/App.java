@@ -37,6 +37,7 @@ public class App extends JFrame {
     private FileWriter w;
 
     public App() {
+        judgmentList = new LinkedList<>();
         jlc = new JudgmentListCreator();
         getter = new FileGetter();
         setTitle("SeeYouInCourt");
@@ -91,6 +92,7 @@ public class App extends JFrame {
 
                             File file = new File(directoryToWrite);
                             File actualFile = new File(file, "SeeYouInCourt.txt");
+                            input.setText("");
                             try {
                                 w = new FileWriter(actualFile);
                                 writer = new PrintWriter(w);
@@ -154,7 +156,7 @@ public class App extends JFrame {
         if (line.length() > 5 && line.substring(0, 5).equals("load ")) {         //C:/Users/JCobb/Desktop/Studia/Obiektowe/html/cbosa
             line = line.substring(4);
             String[] directories = line.split(" ");
-            judgmentList = jlc.buildIJudgmentsFromDirs(directories);
+            judgmentList.addAll(jlc.buildIJudgmentsFromDirs(directories));
         } else {
             String[] command = line.split(" ");                         //ex SA/Rz 160/02
             if (Commands.parser(command[0]) == Commands.rubrum) {
